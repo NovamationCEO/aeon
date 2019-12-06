@@ -1,0 +1,7 @@
+<div [ngClass]="{'actions-page': true, 'expand': status}">
+    <div>Actions</div>
+    <button (click)="toggle()" mat-fab class="settings-button" aria-label="Open or close settings.">
+        <mat-icon>settings</mat-icon>
+    </button>
+    <div>{{status()}}</div>
+</div>
