@@ -15,12 +15,14 @@ body {
     overflow: hidden;
     background: lightgray;
     margin: 0px;
+    user-select: none;
 }
 
 .big {
     display: flex;
     height: 100%;
     width: 100%;
+    justify-content: center;
 }
 
 html, body {

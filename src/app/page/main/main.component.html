@@ -1,4 +1,14 @@
 <div class="main-component">
-    <app-settings></app-settings>
+    <div class="table">
+        <div class="stack draw">
+            <app-draw-deck class="big"></app-draw-deck>
+        </div>
+        <div class="stack play-space">
+            <app-card *ngFor="let card of discardPile" [card]="card"></app-card>
+        </div>
+    </div>
+    <div class="actions"></div>
     <app-actions></app-actions>
+    <app-settings></app-settings>
+
 </div>

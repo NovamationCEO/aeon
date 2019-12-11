@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { timingSafeEqual } from 'crypto';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,31 +7,21 @@ import { timingSafeEqual } from 'crypto';
 
 export class LayoutStoreService {
 
+  //Eventually set to True
+  private setOpen = new BehaviorSubject<boolean>(false);
+  private actOpen = new BehaviorSubject<boolean>(false);
+  settingsOpen = this.setOpen.asObservable();
+  actionsOpen = this.actOpen.asObservable();
+
   constructor() { }
 
-  settingsOpen: boolean = true;
-  actionsOpen: boolean = false;
-
-  getSettingsOpen(): boolean {
-    return this.settingsOpen;
-  }
-
-  getActionsOpen(): boolean {
-    return this.actionsOpen;
-  }
-
   toggleSettings(): void {
-    if (this.settingsOpen) {
-      this.settingsOpen = false;
-      this.actionsOpen = true;
-      return;
-    }
-    this.settingsOpen = true;
-    this.actionsOpen = false;
+    this.actOpen.next(false);
+    this.setOpen.next(!this.setOpen.value);
   }
 
   toggleActions(): void {
-    this.settingsOpen = false;
-    this.actionsOpen = !this.actionsOpen;
+    this.setOpen.next(false);
+    this.actOpen.next(!this.actOpen.value);
   }
 }

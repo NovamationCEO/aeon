@@ -1,0 +1,26 @@
+.card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    z-index: 0;
+
+    // min-width: 80px;
+    min-width: 80px;
+    overflow: hidden;
+    position: relative;
+    border: 2px solid gainsboro;
+    background: oldlace;
+    height: 0;
+    align-self: center;
+    padding-top: 70%;
+    padding-bottom: 70%;
+    margin: 10px;
+
+    .number {
+        font-weight: bold;
+        font-size: xx-large;
+        align-self: center;
+        display: flex;
+    }
+}

@@ -4,18 +4,16 @@ import { LayoutStoreService } from "../../store/layout-store.service";
 @Component({
   selector: 'app-actions',
   templateUrl: './actions.component.html',
-  styleUrls: ['./actions.component.scss'],
-  providers: [LayoutStoreService]
+  styleUrls: ['./actions.component.scss']
 })
 export class ActionsComponent implements OnInit {
+
+  status: boolean;
 
   constructor(private layout: LayoutStoreService) { }
 
   ngOnInit() {
-  }
-
-  status(): boolean {
-    return this.layout.actionsOpen;
+    this.layout.actionsOpen.subscribe(newStatus => this.status = newStatus)
   }
 
   toggle() {

@@ -8,13 +8,12 @@ import { LayoutStoreService } from "../../store/layout-store.service";
 })
 export class SettingsComponent implements OnInit {
 
+  status: boolean;
+
   constructor(private layout: LayoutStoreService) { }
 
   ngOnInit() {
-  }
-
-  status() {
-    return this.layout.getSettingsOpen();
+    this.layout.settingsOpen.subscribe(newStatus => this.status = newStatus)
   }
 
   toggle() {

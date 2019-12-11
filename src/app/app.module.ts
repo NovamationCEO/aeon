@@ -12,6 +12,7 @@ import { SettingsComponent } from './component/settings/settings.component';
 import { ActionsComponent } from './component/actions/actions.component';
 import { CardComponent } from './component/card/card.component';
 import { HttpClientModule } from "@angular/common/http";
+import { DrawDeckComponent } from './component/draw-deck/draw-deck.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { HttpClientModule } from "@angular/common/http";
     NavComponent,
     SettingsComponent,
     ActionsComponent,
-    CardComponent
+    CardComponent,
+    DrawDeckComponent
   ],
   imports: [
     BrowserModule,

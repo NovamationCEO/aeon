@@ -1,16 +1,16 @@
 .settings-page {
     background: darkgray;
     height: 90%;
-    width: 90%;
+    width: 80%;
     border-radius: 0px 50px 50px 0px;
     position: absolute;
-    left: -10px;
+    left: 0px;
     top: 2em;
     overflow: visible;
     display: flex;
     flex-grow: 1;
     padding: 20px;
-    transition: 0.5s left ease;
+    transition: 0.5s transform ease;
 
     .settings-button {
         background: darkgray;
@@ -25,7 +25,17 @@
     }
 
     &.push-left {
-        left: -90%;
-        transition: 0.5s left ease;
+        transform: translateX(-100%);
+        transition: 0.5s transform ease;
+    }
+
+    .icon {
+        transform: rotate(0deg);
+        transition: 0.6s transform ease;
+
+        &.spun {
+            transform: rotate(360deg);
+            transition: 0.6s transform ease;
+        }
     }
 }

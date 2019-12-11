@@ -1,0 +1,11 @@
+<div class="draw-deck">
+    <div class="top-card">
+        <div class="stars"></div>
+        <div class="twinkling"></div>
+        <div class="clouds"></div>
+    </div>
+    <div class="flip-card-button" (click)="drawOne()">
+        <mat-icon *ngIf="hasCards" class="flip-icon draw-icon">play_for_work</mat-icon>
+        <mat-icon *ngIf="!hasCards" class="flip-icon shuffle-icon">cached</mat-icon>
+    </div>
+</div>
