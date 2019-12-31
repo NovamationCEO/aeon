@@ -1,10 +1,9 @@
 .main-component {
-    max-width: 100%;
     position: relative;
     display: flex;
     justify-content: center;
-    max-height: 100%;
-    flex-grow: 1;
+    height: 100%;
+    width: 100%;
     overflow: hidden;
     padding: 2em 0px;
     flex-direction: column;
@@ -13,7 +12,7 @@
         max-width: 100%;
         position: relative;
         display: flex;
-        flex-grow: 3;
+        height: 90%;
         flex-direction: row;
         background-image: url("../../../assets/images/wood.jpg");
         background-repeat: no-repeat;
@@ -47,7 +46,7 @@
     .actions {
         position: relative;
         display: flex;
-        flex-grow: 1;
+        height: 20%;
         background: black;
     }
 }
