@@ -10,9 +10,12 @@ export class CardComponent implements OnInit {
 
   @Input() card: Card;
 
+  cardClass: string = "card hidden";
+
   constructor() { }
 
   ngOnInit() {
+    setTimeout(() => this.cardClass = "card", 0);
   }
 
   cardColor() {
