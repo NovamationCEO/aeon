@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { DeckService } from 'src/app/service/deck.service';
 import { Card } from 'src/app/card';
 
@@ -8,6 +8,14 @@ import { Card } from 'src/app/card';
   styleUrls: ['./draw-deck.component.scss']
 })
 export class DrawDeckComponent implements OnInit {
+
+  @HostListener("window:keydown", ['$event'])
+
+  onKeyDown(event: KeyboardEvent) {
+    if (event.key === " ") {
+      this.drawOne();
+    }
+  }
 
   hasCards: boolean;
   cardStack: Array<Card>;

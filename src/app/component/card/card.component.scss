@@ -1,26 +1,129 @@
 .card {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-grow: 1;
-    z-index: 0;
-
-    // min-width: 80px;
-    min-width: 80px;
+    width: 150px;
+    height: 225px;
     overflow: hidden;
-    position: relative;
     border: 2px solid gainsboro;
-    background: oldlace;
-    height: 0;
+    background: rgb(0, 0, 33);
     align-self: center;
-    padding-top: 70%;
-    padding-bottom: 70%;
     margin: 10px;
+    border-radius: 5%;
 
     .number {
         font-weight: bold;
-        font-size: xx-large;
+        font-size: 60pt;
         align-self: center;
         display: flex;
+        color: white;
+        z-index: 1;
+    }
+
+    .circle {
+        border-radius: 75% 50%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        filter: blur(6px);
+        z-index: 0;
+    }
+
+    .flame-1 {
+        width: 150px;
+        height: 225px;
+        background: red;
+        animation: pulse 1.3s linear infinite alternate, wobble 2.3s linear infinite alternate;
+
+        &.blue {
+            background: blue;
+        }
+
+        &.green {
+            background: green;
+        }
+    }
+
+    .flame-2 {
+        width: 130px;
+        height: 205px;
+        margin: 10px;
+        background: white;
+        animation: pulse 1.2s linear infinite alternate, wobble 1.9s linear infinite alternate;
+    }
+
+    .flame-3 {
+        width: 110px;
+        height: 195px;
+        margin: 20px;
+        background: yellow;
+        animation: pulse 1.7s linear infinite alternate, wobble 1.5s linear infinite alternate;
+
+        &.blue {
+            background: blueviolet;
+        }
+    }
+
+    .flame-4 {
+        width: 90px;
+        height: 175px;
+        margin: 30px;
+        background: orange;
+        animation: pulse 0.9s linear infinite alternate, wobble 2.4s linear infinite alternate;
+
+        &.blue {
+            background: skyblue;
+        }
+
+        &.green {
+            background: lightseagreen;
+        }
+    }
+
+    .flame-5 {
+        width: 70px;
+        height: 155px;
+        margin: 40px;
+        background: red;
+        animation: bigPulse 1.1s linear infinite alternate, wobble 1.3s linear infinite alternate;
+
+        &.blue {
+            background: blue;
+        }
+
+        &.green {
+            background: green;
+        }
+    }
+
+    @keyframes pulse {
+        from {
+            transform: scale(1);
+        }
+
+        to {
+            transform: scale(0.9);
+        }
+    }
+
+    @keyframes bigPulse {
+        from {
+            transform: scale(1);
+        }
+
+        to {
+            transform: scale(0.7);
+        }
+    }
+
+    @keyframes wobble {
+        from {
+            transform: rotateZ(0deg);
+        }
+
+        to {
+            transform: rotateZ(-15deg);
+        }
     }
 }
