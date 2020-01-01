@@ -11,6 +11,15 @@
     align-self: center;
     margin: 10px;
     border-radius: 5%;
+    margin-left: 0px;
+    opacity: 1;
+    transition: 0.5s margin-left ease, 0.2s opacity ease;
+
+    &.hidden {
+        margin-left: 10px;
+        opacity: 0;
+        transition: 0.5s margin-left ease, 0.2s opacity ease;
+    }
 
     .number {
         font-weight: bold;

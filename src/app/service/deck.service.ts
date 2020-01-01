@@ -69,6 +69,6 @@ export class DeckService {
 
     console.log(secondsDiff);
 
-    return secondsDiff < 2;
+    return secondsDiff < 1;
   }
 }
