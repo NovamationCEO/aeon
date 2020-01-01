@@ -15,6 +15,13 @@ export class CardComponent implements OnInit {
   ngOnInit() {
   }
 
-
+  cardColor() {
+    const colorTable = {
+      N: "red",
+      1: "blue",
+      2: "green"
+    };
+    return colorTable[this.card.value];
+  }
 
 }
