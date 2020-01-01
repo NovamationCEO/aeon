@@ -20,6 +20,7 @@ export class DeckService {
   private discardPileSource = new BehaviorSubject<Array<Card>>([]);
   drawPile = this.drawPileSource.asObservable();
   discardPile = this.discardPileSource.asObservable();
+  private lastDraw: Date = new Date();
 
   constructor() { }
 
@@ -44,6 +45,13 @@ export class DeckService {
   }
 
   drawOne(): void {
+
+    if (this.tooFast()) {
+      return;
+    }
+
+    this.lastDraw = new Date();
+
     if (this.drawPileSource.value.length > 0) {
       const newCard = this.drawPileSource.value.pop();
       this.discardPileSource.value.push(newCard);
@@ -51,5 +59,16 @@ export class DeckService {
     }
 
     this.shuffleFull();
+  }
+
+  tooFast(): boolean {
+    const nowDT = new Date();
+    const nowTS = nowDT.getTime();
+    const thenTS = this.lastDraw.getTime();
+    const secondsDiff = Math.floor(Math.abs(thenTS - nowTS) / 1000);
+
+    console.log(secondsDiff);
+
+    return secondsDiff < 2;
   }
 }
