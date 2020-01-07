@@ -6,6 +6,7 @@
     z-index: 0;
     min-width: 40px;
     overflow: hidden;
+    max-width: 300px;
 
     .top-card {
         display: flex;
@@ -27,14 +28,6 @@
             background-image: url("../../../assets/images/CardBack2.jpg");
             transition: 1.5s background-image ease;
         }
-    }
-
-    .filler {
-        display: flex;
-        position: relative;
-        width: 80%;
-        align-items: center;
-        justify-content: center;
     }
 
     .action-icon {

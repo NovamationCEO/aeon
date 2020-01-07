@@ -1,9 +1,7 @@
 <div class="draw-deck">
     <div class='top-card' [ngClass]="{'empty': !hasCards}" (click)="drawOne()">
-        <div class=filler>
-            <mat-icon class="action-icon draw-icon" [ngClass]="{'empty': !hasCards}">
-                {{hasCards ? "play_for_work" : "cached"}}
-            </mat-icon>
-        </div>
+        <mat-icon class="action-icon draw-icon" [ngClass]="{'empty': !hasCards}">
+            {{hasCards ? "play_for_work" : "cached"}}
+        </mat-icon>
     </div>
 </div>
