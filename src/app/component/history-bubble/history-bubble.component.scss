@@ -1,0 +1,28 @@
+.inner-circle {
+    height: 13px;
+    width: 13px;
+    background: black;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.red {
+        background: palevioletred;
+    }
+
+    &.blue {
+        background: paleturquoise;
+    }
+
+    &.green {
+        background: palegreen;
+    }
+
+    .character {
+        display: flex;
+        color: white;
+        font-size: 10px;
+        text-shadow: -1px -1px 25px darkslategray,   1px -1px 25px darkslategray, -1px 1px 25px darkslategray, 1px 1px 25px darkslategray;
+    }
+}

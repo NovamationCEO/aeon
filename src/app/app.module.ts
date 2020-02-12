@@ -13,6 +13,7 @@ import { ActionsComponent } from './component/actions/actions.component';
 import { CardComponent } from './component/card/card.component';
 import { HttpClientModule } from "@angular/common/http";
 import { DrawDeckComponent } from './component/draw-deck/draw-deck.component';
+import { HistoryBubbleComponent } from './component/history-bubble/history-bubble.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { DrawDeckComponent } from './component/draw-deck/draw-deck.component';
     SettingsComponent,
     ActionsComponent,
     CardComponent,
-    DrawDeckComponent
+    DrawDeckComponent,
+    HistoryBubbleComponent
   ],
   imports: [
     BrowserModule,

@@ -8,6 +8,13 @@ import _ from "lodash";
 })
 export class DeckService {
 
+  private deck1Player = [
+    { value: "1", inDrawPile: true },
+    { value: "1", inDrawPile: true },
+    { value: "1", inDrawPile: true },
+    { value: "N", inDrawPile: true },
+    { value: "N", inDrawPile: true }
+  ]
   private deck2Player = [
     { value: "1", inDrawPile: true },
     { value: "1", inDrawPile: true },
@@ -16,10 +23,28 @@ export class DeckService {
     { value: "N", inDrawPile: true },
     { value: "N", inDrawPile: true },
   ];
+  private deck3Player = [
+    { value: "1", inDrawPile: true },
+    { value: "2", inDrawPile: true },
+    { value: "3", inDrawPile: true },
+    { value: "W", inDrawPile: true },
+    { value: "N", inDrawPile: true },
+    { value: "N", inDrawPile: true },
+  ];
+  private deck4Player = [
+    { value: "1", inDrawPile: true },
+    { value: "2", inDrawPile: true },
+    { value: "3", inDrawPile: true },
+    { value: "4", inDrawPile: true },
+    { value: "N", inDrawPile: true },
+    { value: "N", inDrawPile: true },
+  ];
   private drawPileSource = new BehaviorSubject<Array<Card>>(this.deck2Player);
   private discardPileSource = new BehaviorSubject<Array<Card>>([]);
+  private historySource = new BehaviorSubject<Array<String>>([]);
   drawPile = this.drawPileSource.asObservable();
   discardPile = this.discardPileSource.asObservable();
+  history = this.historySource.asObservable();
   private lastDraw: Date = new Date();
 
   constructor() { }
@@ -42,6 +67,7 @@ export class DeckService {
     }
 
     this.drawPileSource.next(deck);
+    this.historySource.value.push("|");
   }
 
   drawOne(): void {
@@ -52,23 +78,21 @@ export class DeckService {
 
     this.lastDraw = new Date();
 
-    if (this.drawPileSource.value.length > 0) {
-      const newCard = this.drawPileSource.value.pop();
-      this.discardPileSource.value.push(newCard);
-      return;
+    if (this.drawPileSource.value.length <= 0) {
+      this.shuffleFull();
     }
 
-    this.shuffleFull();
+    const newCard = this.drawPileSource.value.pop();
+    this.discardPileSource.value.push(newCard);
+    this.historySource.value.push(newCard.value);
   }
 
   tooFast(): boolean {
     const nowDT = new Date();
     const nowTS = nowDT.getTime();
     const thenTS = this.lastDraw.getTime();
-    const secondsDiff = Math.floor(Math.abs(thenTS - nowTS) / 1000);
+    const secondsDiff = (Math.abs(thenTS - nowTS) / 1000);
 
-    console.log(secondsDiff);
-
-    return secondsDiff < 1;
+    return secondsDiff < 0.5;
   }
 }

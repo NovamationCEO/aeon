@@ -15,12 +15,14 @@ import { Card } from 'src/app/card';
 export class MainComponent implements OnInit {
 
   discardPile: Array<Card>;
+  history: Array<String>
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, private dealer: DeckService) {
     iconRegistry.addSvgIcon(
       'settingsIcon',
       sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/gearIcon.svg'))
     this.dealer.discardPile.subscribe(currentStack => this.discardPile = currentStack);
+    this.dealer.history.subscribe(history => this.history = history);
   }
 
   ngOnInit() {
