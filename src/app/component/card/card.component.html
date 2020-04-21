@@ -1,10 +1,10 @@
 <div class="card">
     <div class="card-face">
-    <div class="circle flame-1" [ngClass]="cardColor()"></div>
-    <div class="circle flame-2" [ngClass]="cardColor()"></div>
-    <div class="circle flame-3" [ngClass]="cardColor()"></div>
-    <div class="circle flame-4" [ngClass]="cardColor()"></div>
-    <div class="circle flame-5" [ngClass]="cardColor()"></div>
+    <div class="circle flame-1" [ngStyle]="{background: ringColors[0]}"></div>
+    <div class="circle flame-2" [ngStyle]="{background: ringColors[1]}"></div>
+    <div class="circle flame-3" [ngStyle]="{background: ringColors[2]}"></div>
+    <div class="circle flame-4" [ngStyle]="{background: ringColors[3]}"></div>
+    <div class="circle flame-5" [ngStyle]="{background: ringColors[0]}"></div>
     <div class="number">
         {{card}}
     </div>

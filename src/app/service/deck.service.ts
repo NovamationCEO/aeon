@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import _ from "lodash";
+import { resetFakeAsyncZone } from '@angular/core/testing';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class DeckService {
   private deck2Player = ["1", "1", "2", "2", "N", "N"]; 
   private deck3Player = ["1", "2", "3", "W", "N", "N"];
   private deck4Player = ["1", "2", "3", "4", "N", "N"];
+  private deck4PlayerAlt = ["A", "A", "B", "B", "N", "N"];
   private drawPileSource = new BehaviorSubject<Array<String>>(this.deck2Player);
   private discardPileSource = new BehaviorSubject<Array<String>>([]);
   private historySource = new BehaviorSubject<Array<String>>([]);
@@ -21,13 +23,32 @@ export class DeckService {
 
   constructor() { }
 
-  init() {
+    deckType: string;
+
+  init(): void {
+    this.deckType = "2";
+    this.shuffleFull();
+  }
+
+  resetTable(deckType: string|null): void {
+    this.historySource.next([]);
+
+    if (deckType) {
+        this.deckType = deckType;
+    }
     this.shuffleFull();
   }
 
   loadCards(): Array<String> {
-    return _.clone(this.deck2Player);
-  }
+      switch(this.deckType) {
+        case "1": return _.clone(this.deck1Player);
+        case "2": return _.clone(this.deck2Player);
+        case "3": return _.clone(this.deck3Player);
+        case "4": return _.clone(this.deck4Player);
+        case "AB": return _.clone(this.deck4PlayerAlt);
+        default: return ["0"];
+      }
+    }
 
   shuffleFull(): void {
     const deck = this.loadCards();
@@ -65,6 +86,6 @@ export class DeckService {
     const thenTS = this.lastDraw.getTime();
     const secondsDiff = (Math.abs(thenTS - nowTS) / 1000);
 
-    return secondsDiff < 0.5;
+    return secondsDiff < 0.2;
   }
 }

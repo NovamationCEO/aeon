@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LayoutStoreService } from "../../store/layout-store.service";
+import { DeckService } from "../../service/deck.service";
 
 @Component({
   selector: 'app-settings',
@@ -12,7 +13,7 @@ export class SettingsComponent implements OnInit {
   deckType: string;
   hidePlayers: boolean;
 
-  constructor(private layout: LayoutStoreService) { }
+  constructor(private layout: LayoutStoreService, private dealer: DeckService) { }
 
   ngOnInit() {
     this.layout.settingsOpen.subscribe(newStatus => this.status = newStatus);
@@ -30,6 +31,8 @@ export class SettingsComponent implements OnInit {
       }
 
       this.deckType = newValue;
+      this.dealer.resetTable(newValue);
+
   }
 
   toggleShowPlayers() {
