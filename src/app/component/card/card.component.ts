@@ -22,7 +22,7 @@ export class CardComponent implements OnInit {
   cardColor(): void {
     switch(this.card) {
       case "N": {
-          this.ringColors = ["red", "white", "yellow", "orange"];
+          this.ringColors = ["red", "black", "yellow", "orange"];
           break;
       }
       case "1": {
@@ -34,7 +34,7 @@ export class CardComponent implements OnInit {
         break;
     }
     case "3": {
-        this.ringColors = ["darkorange", "honeydew", "gold", "lightsalmon"];
+        this.ringColors = ["darkorange", "skyblue", "gold", "lightsalmon"];
         break;
     }
     case "4": {
