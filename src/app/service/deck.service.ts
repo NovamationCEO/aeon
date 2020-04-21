@@ -11,6 +11,7 @@ export class DeckService {
   private deck1Player = ["1", "1", "1", "N", "N"]; 
   private deck2Player = ["1", "1", "2", "2", "N", "N"]; 
   private deck3Player = ["1", "2", "3", "W", "N", "N"];
+  private deck3APlayer = ["A", "A", "3", "W", "N", "N"];
   private deck4Player = ["1", "2", "3", "4", "N", "N"];
   private deck4PlayerAlt = ["A", "A", "B", "B", "N", "N"];
   private drawPileSource = new BehaviorSubject<Array<String>>(this.deck2Player);
@@ -44,6 +45,7 @@ export class DeckService {
         case "1": return _.clone(this.deck1Player);
         case "2": return _.clone(this.deck2Player);
         case "3": return _.clone(this.deck3Player);
+        case "3A": return _.clone(this.deck3APlayer);
         case "4": return _.clone(this.deck4Player);
         case "AB": return _.clone(this.deck4PlayerAlt);
         default: return ["0"];
