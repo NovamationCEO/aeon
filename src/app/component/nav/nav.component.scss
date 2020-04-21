@@ -1,7 +1,9 @@
+@import "../../../../colors.scss";
+
 .top-bar {
-    background: lightseagreen;
+    background: $primary;
     font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-    color: lightgray;
+    color: $aeon-white;
     display: flex;
     line-height: 0.5em;
     padding: 10px;

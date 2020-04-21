@@ -1,4 +1,4 @@
-<div [ngClass]="{'settings-page': true, 'push-left': status}">  
+<div [ngClass]="{'settings-page': true, 'push-left': !status}">  
     <button (click)="toggle()" mat-fab class="settings-button" aria-label="Open or close settings.">
         <mat-icon [ngClass]="{'icon': true, 'spun': status}">settings</mat-icon>
     </button>
