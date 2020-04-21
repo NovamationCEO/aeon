@@ -11,6 +11,7 @@ import { DeckService } from 'src/app/service/deck.service';
     class: "big"
   }
 })
+
 export class MainComponent implements OnInit {
 
   discardPile: Array<String>;

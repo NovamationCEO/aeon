@@ -3,8 +3,9 @@
         <mat-icon [ngClass]="{'icon': true, 'spun': status}">settings</mat-icon>
     </button>
     <div class="settings-container">
+        <div class="settings-wrapper">
     <div class="title-bar">Settings</div>
-    <div class="row">
+    <div class="main-row">
         <div class="player-bar" [ngClass]="{'tiny': hidePlayers}">
             <div class="player-icon-container" [ngClass]="{'tiny': hidePlayers}" (click)="toggleShowPlayers()">
                 <div *ngIf="hidePlayers">
@@ -31,6 +32,29 @@
                 AB
             </div>
         </div>
+        <div class="light-up-column">
+            <div class="enabled-actions-container">
+                Light-up
+            </div>
+            <div class="base-sets">
+                <div class="set-button" (click)="toggleBaseSet('AE')" [ngClass]="{activated: baseSet['AE']}">
+                    Aeon's End
+                </div>
+                <div class="set-button" (click)="toggleBaseSet('WE')" [ngClass]="{activated: baseSet['WE']}">
+                    War Eternal
+                </div>
+                <div class="set-button" (click)="toggleBaseSet('LG')" [ngClass]="{activated: baseSet['LG']}">
+                    Legacy
+                </div>
+                <div class="set-button" (click)="toggleBaseSet('NA')" [ngClass]="{activated: baseSet['NA']}">
+                    The New Age
+                </div>
+                <div class="set-button" (click)="toggleBaseSet('OC')" [ngClass]="{activated: baseSet['OC']}">
+                    Outcasts
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 </div>
 </div>

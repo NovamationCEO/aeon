@@ -12,7 +12,14 @@
     display: flex;
     flex-grow: 1;
     padding: 20px;
-    transition: 0.5s transform ease;
+    transition: 0.5s transform ease;    
+    max-height: 100%;
+
+    .settings-wrapper {
+        position: relative;
+        max-height: 100%;
+        max-width: 100%;
+    }
 
     .settings-button {
         background: $background-light;
@@ -56,11 +63,13 @@
             color: $aeon-white;
         }
 
-        .row {
+        .main-row {
             display: flex;
             flex-direction: row;
             flex: 1;
             position: relative;
+            max-height: 100%;
+            height: 100%;
 
             .player-bar {
                 width: 60px;
@@ -122,6 +131,46 @@
 
                     &:hover {
                         border: 2px solid black;
+                    }
+                }
+            }
+
+            .light-up-column {
+                display: flex;
+                flex-direction: column;
+                position: relative;
+                max-height: 100%;
+                width: 100%;
+
+                .enabled-actions-container {
+                    border: 2px solid $aeon-white;
+                    display: flex;
+                    flex: 1;
+                    width: 100%;
+                }
+            
+                .base-sets {
+                    display: flex;
+                    flex-direction: row;
+                    width: 100%;
+                    justify-content: space-around;
+                    flex-wrap: wrap;
+            
+                    .set-button {
+                        background: $background-light;
+                        color: $aeon-white;
+                        padding: 10px;
+                        border-radius: 20px;
+                        min-width: 100px;
+                        margin: 10px;
+                        font-weight: bold;
+                        text-justify: center;
+                        text-align: center;
+
+                        &.activated {
+                            background: $aeon-white;
+                            color: black;
+                        }
                     }
                 }
             }
