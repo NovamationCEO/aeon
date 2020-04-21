@@ -4,12 +4,14 @@
     </div>
 
     <div class="table">
-        <div class="draw">
-            <app-draw-deck class="big"></app-draw-deck>
-        </div>
         <div class="play-space">
-            <app-card *ngFor="let card of discardPile" [card]="card" class="card-container"></app-card>
+        <div class="card-container">
+            <app-draw-deck class="draw-deck"></app-draw-deck>
         </div>
+        <div class="card-container" *ngFor="let card of discardPile">
+            <app-card [card]="card" class="card"></app-card>
+        </div>
+    </div>
     </div>
 
     <div class="actions"></div>

@@ -1,6 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { DeckService } from 'src/app/service/deck.service';
-import { Card } from 'src/app/card';
 
 @Component({
   selector: 'app-draw-deck',
@@ -18,7 +17,7 @@ export class DrawDeckComponent implements OnInit {
   }
 
   hasCards: boolean;
-  cardStack: Array<Card>;
+  cardStack: Array<String>;
 
   constructor(private dealer: DeckService) { }
 

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Card } from '../card';
 import _ from "lodash";
 
 @Injectable({
@@ -8,39 +7,12 @@ import _ from "lodash";
 })
 export class DeckService {
 
-  private deck1Player = [
-    { value: "1", inDrawPile: true },
-    { value: "1", inDrawPile: true },
-    { value: "1", inDrawPile: true },
-    { value: "N", inDrawPile: true },
-    { value: "N", inDrawPile: true }
-  ]
-  private deck2Player = [
-    { value: "1", inDrawPile: true },
-    { value: "1", inDrawPile: true },
-    { value: "2", inDrawPile: true },
-    { value: "2", inDrawPile: true },
-    { value: "N", inDrawPile: true },
-    { value: "N", inDrawPile: true },
-  ];
-  private deck3Player = [
-    { value: "1", inDrawPile: true },
-    { value: "2", inDrawPile: true },
-    { value: "3", inDrawPile: true },
-    { value: "W", inDrawPile: true },
-    { value: "N", inDrawPile: true },
-    { value: "N", inDrawPile: true },
-  ];
-  private deck4Player = [
-    { value: "1", inDrawPile: true },
-    { value: "2", inDrawPile: true },
-    { value: "3", inDrawPile: true },
-    { value: "4", inDrawPile: true },
-    { value: "N", inDrawPile: true },
-    { value: "N", inDrawPile: true },
-  ];
-  private drawPileSource = new BehaviorSubject<Array<Card>>(this.deck2Player);
-  private discardPileSource = new BehaviorSubject<Array<Card>>([]);
+  private deck1Player = ["1", "1", "1", "N", "N"]; 
+  private deck2Player = ["1", "1", "2", "2", "N", "N"]; 
+  private deck3Player = ["1", "2", "3", "W", "N", "N"];
+  private deck4Player = ["1", "2", "3", "4", "N", "N"];
+  private drawPileSource = new BehaviorSubject<Array<String>>(this.deck2Player);
+  private discardPileSource = new BehaviorSubject<Array<String>>([]);
   private historySource = new BehaviorSubject<Array<String>>([]);
   drawPile = this.drawPileSource.asObservable();
   discardPile = this.discardPileSource.asObservable();
@@ -53,7 +25,7 @@ export class DeckService {
     this.shuffleFull();
   }
 
-  loadCards(): Array<Card> {
+  loadCards(): Array<String> {
     return _.clone(this.deck2Player);
   }
 
@@ -84,7 +56,7 @@ export class DeckService {
 
     const newCard = this.drawPileSource.value.pop();
     this.discardPileSource.value.push(newCard);
-    this.historySource.value.push(newCard.value);
+    this.historySource.value.push(newCard);
   }
 
   tooFast(): boolean {

@@ -7,10 +7,7 @@
     padding: 2em 0px;
     flex-direction: column;
 
-    .card-container {
-        width: 25%;
-        min-width: 100px;
-    }
+    
 
     .history {
         height: 20px;
@@ -55,13 +52,13 @@
             flex-wrap: wrap;
             align-items: flex-start;
             align-content: flex-start;
-            overflow: hidden;
-            width: 65%;
-        }
+            flex: 1;
 
-        .draw {
-            width: 33%;
-            margin-right: 2%;
+            .card-container {
+                width: 24%;
+                max-height: 49%;
+                min-height: 150px;
+            }
         }
     }
 

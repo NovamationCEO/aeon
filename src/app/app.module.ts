@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainComponent } from "./page/main/main.component";
-import { AppIsRunningComponent } from './page/app-is-running/app-is-running.component';
 import { NavComponent } from './component/nav/nav.component';
 import { SettingsComponent } from './component/settings/settings.component';
 import { ActionsComponent } from './component/actions/actions.component';
@@ -18,7 +17,6 @@ import { HistoryBubbleComponent } from './component/history-bubble/history-bubbl
 @NgModule({
   declarations: [
     AppComponent,
-    AppIsRunningComponent,
     MainComponent,
     NavComponent,
     SettingsComponent,

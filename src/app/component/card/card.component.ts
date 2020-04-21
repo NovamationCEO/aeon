@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Card } from 'src/app/card';
 
 @Component({
   selector: 'app-card',
@@ -8,7 +7,7 @@ import { Card } from 'src/app/card';
 })
 export class CardComponent implements OnInit {
 
-  @Input() card: Card;
+  @Input() card: string;
 
   cardClass: string = "card hidden";
 
@@ -24,7 +23,7 @@ export class CardComponent implements OnInit {
       1: "blue",
       2: "green"
     };
-    return colorTable[this.card.value];
+    return colorTable[this.card];
   }
 
 }

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { DeckService } from 'src/app/service/deck.service';
-import { Card } from 'src/app/card';
 
 @Component({
   selector: 'app-main',
@@ -14,7 +13,7 @@ import { Card } from 'src/app/card';
 })
 export class MainComponent implements OnInit {
 
-  discardPile: Array<Card>;
+  discardPile: Array<String>;
   history: Array<String>
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, private dealer: DeckService) {
@@ -28,5 +27,7 @@ export class MainComponent implements OnInit {
   ngOnInit() {
     this.dealer.init();
   }
+
+
 
 }
