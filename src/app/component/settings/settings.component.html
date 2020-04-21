@@ -7,7 +7,10 @@
     <div class="row">
         <div class="player-bar" [ngClass]="{'tiny': hidePlayers}">
             <div class="player-icon-container" [ngClass]="{'tiny': hidePlayers}" (click)="toggleShowPlayers()">
-                <mat-icon class="player-icon">face</mat-icon>
+                <div *ngIf="hidePlayers">
+                    {{ deckType }}
+                </div>
+                <mat-icon *ngIf="!hidePlayers" class="player-icon">face</mat-icon>
             </div>
             <div class="player-button" (click)="setDeckType('1')" [ngClass]="{'activated': deckType == '1', 'hidden': hidePlayers}">
                 1
