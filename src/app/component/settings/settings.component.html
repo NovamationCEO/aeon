@@ -1,6 +1,30 @@
-<div [ngClass]="{'settings-page': true, 'push-left': !status}">
-    <div>Settings</div>
+<div [ngClass]="{'settings-page': true, 'push-left': status}">  
     <button (click)="toggle()" mat-fab class="settings-button" aria-label="Open or close settings.">
         <mat-icon [ngClass]="{'icon': true, 'spun': status}">settings</mat-icon>
     </button>
+    <div class="settings-container">
+    <div class="title-bar">Settings</div>
+    <div class="row">
+        <div class="player-bar" [ngClass]="{'tiny': hidePlayers}">
+            <div class="player-icon-container" [ngClass]="{'tiny': hidePlayers}" (click)="toggleShowPlayers()">
+                <mat-icon class="player-icon">face</mat-icon>
+            </div>
+            <div class="player-button" (click)="setDeckType('1')" [ngClass]="{'activated': deckType == '1', 'hidden': hidePlayers}">
+                1
+            </div>
+            <div class="player-button" (click)="setDeckType('2')" [ngClass]="{activated: deckType == '2', 'hidden': hidePlayers}">
+                2
+            </div>
+            <div class="player-button" (click)="setDeckType('3')" [ngClass]="{activated: deckType == '3', 'hidden': hidePlayers}">
+                3
+            </div>
+            <div class="player-button" (click)="setDeckType('4')" [ngClass]="{activated: deckType == '4', 'hidden': hidePlayers}">
+                4
+            </div>
+            <div class="player-button" (click)="setDeckType('AB')" [ngClass]="{activated: deckType == 'AB', 'hidden': hidePlayers}">
+                AB
+            </div>
+        </div>
+    </div>
+</div>
 </div>
