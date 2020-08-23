@@ -45,6 +45,10 @@ export class SettingsComponent implements OnInit {
         }
     }
 
+    setOrder() {
+        return ['AE', 'WE', 'LG', 'NA', 'OC']
+    }
+
     ngOnInit() {
         this.layout.settingsOpen.subscribe(
             (newStatus) => (this.status = newStatus)

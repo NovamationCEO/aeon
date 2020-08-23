@@ -27,9 +27,9 @@
                         Light-up
                     </div>
                     <div class="base-sets">
-                        <div class="set-button" *ngFor="let set of setNames() | keyvalue"
-                            (click)="toggleBaseSet(set.key)" [ngClass]="{ activated: baseSet[set.key] }">
-                            {{set.value}}
+                        <div class="set-button" *ngFor="let set of setOrder()" (click)="toggleBaseSet(set)"
+                            [ngClass]="{ activated: baseSet[set] }">
+                            {{setNames()[set]}}
                         </div>
                     </div>
                 </div>

@@ -72,22 +72,12 @@
             height: 100%;
 
             .player-bar {
-                width: 60px;
-                height: 100%;
-                background: $background-dark;
                 display: flex;
                 flex-direction: column;
                 justify-content: space-around;
-                align-items: center;
-                max-height: 500px;
-                border-radius: 30px;
-                transition: 0.3s ease max-height;
-                border: 1px solid $aeon-white;
-
-                &.tiny {
-                    max-height: 80px;
-                    transition: 0.3s ease max-height;
-                }
+                align-items: top;
+                margin: 10px;
+                margin-top: 0px;
 
                 .player-icon-container {
                     width: 41px;
@@ -100,7 +90,7 @@
                     border: 2px solid black;
 
                     &.tiny {
-                        background: $background-light;
+                        background: $aeon-white;
                     }
                 }
 
@@ -115,13 +105,15 @@
                     font-weight: bold;
                     text-align: center;
                     border: 2px solid $background-dark;
+                    opacity: 1;
+                    transition: 0.2s ease opacity;
 
                     .number {
                         font-size: 20px;
                     }
 
                     &.hidden {
-                        display: none;
+                        opacity: 0;
                     }
 
                     &.activated {
