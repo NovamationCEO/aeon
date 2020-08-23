@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LayoutStoreService } from '../../store/layout-store.service';
 import { DeckService } from '../../service/deck.service';
+import { SetStore } from '../../store/sets-store.service'
 
 @Component({
     selector: 'app-settings',
@@ -8,21 +9,19 @@ import { DeckService } from '../../service/deck.service';
     styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent implements OnInit {
-    status: boolean;
-    deckType: string;
-    hidePlayers: boolean;
-    baseSet = {
-        AE: true,
-        WE: true,
-        LG: false,
-        NA: true,
-        OC: false,
-    };
 
     constructor(
         private layout: LayoutStoreService,
-        private dealer: DeckService
+        private dealer: DeckService,
+        private sets: SetStore,
     ) { }
+    ;
+    status: boolean;
+    deckType: string;
+    hidePlayers: boolean;
+
+    orderedSetList = this.sets.orderedSets
+    setsActive() { console.log('HI', this.sets.activeSets); return this.sets.activeSets }
 
     deckNames() {
         return {
@@ -33,22 +32,7 @@ export class SettingsComponent implements OnInit {
             d4: 4,
             d4a: 'AB',
         }
-    };
-
-    setNames() {
-        return {
-            AE: 'Aeon\'s End',
-            WE: 'War Eternal',
-            LG: 'Legacy',
-            NA: 'The New Age',
-            OC: 'Outcasts',
-        }
     }
-
-    setOrder() {
-        return ['AE', 'WE', 'LG', 'NA', 'OC']
-    }
-
     ngOnInit() {
         this.layout.settingsOpen.subscribe(
             (newStatus) => (this.status = newStatus)
@@ -75,6 +59,6 @@ export class SettingsComponent implements OnInit {
     }
 
     toggleBaseSet(setName: string): void {
-        this.baseSet[setName] = !this.baseSet[setName];
+        this.sets.toggleActiveSet(setName)
     }
 }

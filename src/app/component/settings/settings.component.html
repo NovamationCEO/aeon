@@ -19,7 +19,7 @@
                             activated: deckType == type.key,
                             hidden: hidePlayers
                         }">
-                        {{type.value }}
+                        {{ type.value }}
                     </div>
                 </div>
                 <div class="light-up-column">
@@ -27,9 +27,9 @@
                         Light-up
                     </div>
                     <div class="base-sets">
-                        <div class="set-button" *ngFor="let set of setOrder()" (click)="toggleBaseSet(set)"
-                            [ngClass]="{ activated: baseSet[set] }">
-                            {{setNames()[set]}}
+                        <div class="set-button" *ngFor="let set of orderedSetList" (click)="toggleBaseSet(set.abbr)"
+                            [ngClass]="{ activated: setsActive().source.value[set.abbr] }">
+                            {{ set.name }}
                         </div>
                     </div>
                 </div>
