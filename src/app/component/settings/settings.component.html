@@ -28,7 +28,7 @@
                     </div>
                     <div class="base-sets">
                         <div class="set-button" *ngFor="let set of orderedSetList" (click)="toggleBaseSet(set.abbr)"
-                            [ngClass]="{ activated: setsActive().source.value[set.abbr] }">
+                            [ngClass]="{ activated: setsActive[set.abbr] }">
                             {{ set.name }}
                         </div>
                     </div>

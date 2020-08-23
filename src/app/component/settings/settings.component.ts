@@ -19,9 +19,9 @@ export class SettingsComponent implements OnInit {
     status: boolean;
     deckType: string;
     hidePlayers: boolean;
+    setsActive: object;
 
     orderedSetList = this.sets.orderedSets
-    setsActive() { console.log('HI', this.sets.activeSets); return this.sets.activeSets }
 
     deckNames() {
         return {
@@ -37,6 +37,7 @@ export class SettingsComponent implements OnInit {
         this.layout.settingsOpen.subscribe(
             (newStatus) => (this.status = newStatus)
         );
+        this.sets.activeSets.subscribe(newValue => this.setsActive = newValue)
         this.deckType = 'd2';
         this.hidePlayers = true;
     }
