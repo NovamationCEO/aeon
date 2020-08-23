@@ -1,60 +1,39 @@
-<div [ngClass]="{'settings-page': true, 'push-left': !status}">  
+<div [ngClass]="{ 'settings-page': true, 'push-left': !status }">
     <button (click)="toggle()" mat-fab class="settings-button" aria-label="Open or close settings.">
-        <mat-icon [ngClass]="{'icon': true, 'spun': status}">settings</mat-icon>
+        <mat-icon [ngClass]="{ icon: true, spun: status }">settings</mat-icon>
     </button>
     <div class="settings-container">
         <div class="settings-wrapper">
-    <div class="title-bar">Settings</div>
-    <div class="main-row">
-        <div class="player-bar" [ngClass]="{'tiny': hidePlayers}">
-            <div class="player-icon-container" [ngClass]="{'tiny': hidePlayers}" (click)="toggleShowPlayers()">
-                <div *ngIf="hidePlayers">
-                    {{ deckType }}
+            <div class="title-bar">Settings</div>
+            <div class="main-row">
+                <div class="player-bar" [ngClass]="{ tiny: hidePlayers }">
+                    <div class="player-icon-container" [ngClass]="{ tiny: hidePlayers }" (click)="toggleShowPlayers()">
+                        <div *ngIf="hidePlayers">
+                            {{ deckNames()[deckType] }}
+                        </div>
+                        <mat-icon *ngIf="!hidePlayers" class="player-icon">face</mat-icon>
+                    </div>
+
+                    <div class="player-button" *ngFor="let type of deckNames() | keyvalue"
+                        (click)="setDeckType(type.key)" [ngClass]="{
+                            activated: deckType == type.key,
+                            hidden: hidePlayers
+                        }">
+                        {{type.value }}
+                    </div>
                 </div>
-                <mat-icon *ngIf="!hidePlayers" class="player-icon">face</mat-icon>
-            </div>
-            <div class="player-button" (click)="setDeckType('1')" [ngClass]="{'activated': deckType == '1', 'hidden': hidePlayers}">
-                1
-            </div>
-            <div class="player-button" (click)="setDeckType('2')" [ngClass]="{activated: deckType == '2', 'hidden': hidePlayers}">
-                2
-            </div>
-            <div class="player-button" (click)="setDeckType('3')" [ngClass]="{activated: deckType == '3', 'hidden': hidePlayers}">
-                3
-            </div>
-            <div class="player-button" (click)="setDeckType('3A')" [ngClass]="{activated: deckType == '3A', 'hidden': hidePlayers}">
-                3A
-            </div>
-            <div class="player-button" (click)="setDeckType('4')" [ngClass]="{activated: deckType == '4', 'hidden': hidePlayers}">
-                4
-            </div>
-            <div class="player-button" (click)="setDeckType('AB')" [ngClass]="{activated: deckType == 'AB', 'hidden': hidePlayers}">
-                AB
-            </div>
-        </div>
-        <div class="light-up-column">
-            <div class="enabled-actions-container">
-                Light-up
-            </div>
-            <div class="base-sets">
-                <div class="set-button" (click)="toggleBaseSet('AE')" [ngClass]="{activated: baseSet['AE']}">
-                    Aeon's End
-                </div>
-                <div class="set-button" (click)="toggleBaseSet('WE')" [ngClass]="{activated: baseSet['WE']}">
-                    War Eternal
-                </div>
-                <div class="set-button" (click)="toggleBaseSet('LG')" [ngClass]="{activated: baseSet['LG']}">
-                    Legacy
-                </div>
-                <div class="set-button" (click)="toggleBaseSet('NA')" [ngClass]="{activated: baseSet['NA']}">
-                    The New Age
-                </div>
-                <div class="set-button" (click)="toggleBaseSet('OC')" [ngClass]="{activated: baseSet['OC']}">
-                    Outcasts
+                <div class="light-up-column">
+                    <div class="enabled-actions-container">
+                        Light-up
+                    </div>
+                    <div class="base-sets">
+                        <div class="set-button" *ngFor="let set of setNames() | keyvalue"
+                            (click)="toggleBaseSet(set.key)" [ngClass]="{ activated: baseSet[set.key] }">
+                            {{set.value}}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-</div>
 </div>

@@ -1,25 +1,24 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { DrawDeckComponent } from './draw-deck.component';
+import { DrawDeckComponent } from "./draw-deck.component";
 
-describe('DrawDeckComponent', () => {
-  let component: DrawDeckComponent;
-  let fixture: ComponentFixture<DrawDeckComponent>;
+describe("DrawDeckComponent", () => {
+    let component: DrawDeckComponent;
+    let fixture: ComponentFixture<DrawDeckComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ DrawDeckComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [DrawDeckComponent],
+        }).compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(DrawDeckComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(DrawDeckComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it("should create", () => {
+        expect(component).toBeTruthy();
+    });
 });

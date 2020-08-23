@@ -1,93 +1,88 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import _ from "lodash";
+import _ from 'lodash';
 import { resetFakeAsyncZone } from '@angular/core/testing';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class DeckService {
+    private decks = {
+        d1: ['1', '1', '1', 'N', 'N'],
+        d2: ['1', '1', '2', '2', 'N', 'N'],
+        d3: ['1', '2', '3', 'W', 'N', 'N'],
+        d3a: ['A', 'A', '3', 'W', 'N', 'N'],
+        d4: ['1', '2', '3', '4', 'N', 'N'],
+        d4a: ['A', 'A', 'B', 'B', 'N', 'N'],
+    };
 
-  private deck1Player = ["1", "1", "1", "N", "N"]; 
-  private deck2Player = ["1", "1", "2", "2", "N", "N"]; 
-  private deck3Player = ["1", "2", "3", "W", "N", "N"];
-  private deck3APlayer = ["A", "A", "3", "W", "N", "N"];
-  private deck4Player = ["1", "2", "3", "4", "N", "N"];
-  private deck4PlayerAlt = ["A", "A", "B", "B", "N", "N"];
-  private drawPileSource = new BehaviorSubject<Array<String>>(this.deck2Player);
-  private discardPileSource = new BehaviorSubject<Array<String>>([]);
-  private historySource = new BehaviorSubject<Array<String>>([]);
-  drawPile = this.drawPileSource.asObservable();
-  discardPile = this.discardPileSource.asObservable();
-  history = this.historySource.asObservable();
-  private lastDraw: Date = new Date();
+    private drawPileSource = new BehaviorSubject<Array<string>>(this.decks.d2);
+    private discardPileSource = new BehaviorSubject<Array<string>>([]);
+    private historySource = new BehaviorSubject<Array<string>>([]);
+    drawPile = this.drawPileSource.asObservable();
+    discardPile = this.discardPileSource.asObservable();
+    history = this.historySource.asObservable();
+    private lastDraw: Date = new Date();
 
-  constructor() { }
+    constructor() { }
 
     deckType: string;
 
-  init(): void {
-    this.deckType = "2";
-    this.shuffleFull();
-  }
-
-  resetTable(deckType: string|null): void {
-    this.historySource.next([]);
-
-    if (deckType) {
-        this.deckType = deckType;
-    }
-    this.shuffleFull();
-  }
-
-  loadCards(): Array<String> {
-      switch(this.deckType) {
-        case "1": return _.clone(this.deck1Player);
-        case "2": return _.clone(this.deck2Player);
-        case "3": return _.clone(this.deck3Player);
-        case "3A": return _.clone(this.deck3APlayer);
-        case "4": return _.clone(this.deck4Player);
-        case "AB": return _.clone(this.deck4PlayerAlt);
-        default: return ["0"];
-      }
+    init(): void {
+        this.deckType = 'd2';
+        this.shuffleFull();
     }
 
-  shuffleFull(): void {
-    const deck = this.loadCards();
-    this.discardPileSource.next([]);
+    resetTable(deckType: string | null): void {
+        this.historySource.next([]);
 
-    for (let i = deck.length - 1; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i + 1));
-      [deck[i], deck[j]] = [deck[j], deck[i]];
+        if (deckType) {
+            this.deckType = deckType;
+        }
+        this.shuffleFull();
     }
 
-    this.drawPileSource.next(deck);
-    this.historySource.value.push("|");
-  }
-
-  drawOne(): void {
-
-    if (this.tooFast()) {
-      return;
+    loadCards(): Array<string> {
+        return _.clone(this.decks[this.deckType]);
     }
 
-    this.lastDraw = new Date();
+    shuffleFull(): void {
+        const deck = this.loadCards();
+        console.log('deckType:', this.deckType, deck);
+        this.discardPileSource.next([]);
 
-    if (this.drawPileSource.value.length <= 0) {
-      this.shuffleFull();
+
+        for (let i = deck.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [deck[i], deck[j]] = [deck[j], deck[i]];
+        }
+
+        this.drawPileSource.next(deck);
+        this.historySource.value.push('|');
     }
 
-    const newCard = this.drawPileSource.value.pop();
-    this.discardPileSource.value.push(newCard);
-    this.historySource.value.push(newCard);
-  }
+    drawOne(): void {
+        if (this.tooFast()) {
+            return;
+        }
 
-  tooFast(): boolean {
-    const nowDT = new Date();
-    const nowTS = nowDT.getTime();
-    const thenTS = this.lastDraw.getTime();
-    const secondsDiff = (Math.abs(thenTS - nowTS) / 1000);
+        this.lastDraw = new Date();
 
-    return secondsDiff < 0.2;
-  }
+        if (this.drawPileSource.value.length <= 0) {
+            this.shuffleFull();
+        }
+
+        const newCard = this.drawPileSource.value.pop();
+        this.discardPileSource.value.push(newCard);
+        this.historySource.value.push(newCard);
+    }
+
+    tooFast(): boolean {
+        const nowDT = new Date();
+        const nowTS = nowDT.getTime();
+        const thenTS = this.lastDraw.getTime();
+        const secondsDiff = Math.abs(thenTS - nowTS) / 1000;
+
+        return secondsDiff < 0.2;
+    }
 }

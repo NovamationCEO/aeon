@@ -1,36 +1,33 @@
-import { Component, OnInit, HostListener } from '@angular/core';
-import { DeckService } from 'src/app/service/deck.service';
+import { Component, OnInit, HostListener } from "@angular/core";
+import { DeckService } from "src/app/service/deck.service";
 
 @Component({
-  selector: 'app-draw-deck',
-  templateUrl: './draw-deck.component.html',
-  styleUrls: ['./draw-deck.component.scss']
+    selector: "app-draw-deck",
+    templateUrl: "./draw-deck.component.html",
+    styleUrls: ["./draw-deck.component.scss"],
 })
 export class DrawDeckComponent implements OnInit {
+    constructor(private dealer: DeckService) {}
 
-  @HostListener("window:keydown", ['$event'])
+    hasCards: boolean;
+    cardStack: Array<string>;
 
-  onKeyDown(event: KeyboardEvent) {
-    if (event.key === " ") {
-      this.drawOne();
+    @HostListener("window:keydown", ["$event"])
+    onKeyDown(event: KeyboardEvent) {
+        if (event.key === " ") {
+            this.drawOne();
+        }
     }
-  }
 
-  hasCards: boolean;
-  cardStack: Array<String>;
+    ngOnInit() {
+        this.dealer.drawPile.subscribe((currentStack) => {
+            this.cardStack = currentStack;
+            this.hasCards = true;
+        });
+    }
 
-  constructor(private dealer: DeckService) { }
-
-  ngOnInit() {
-    this.dealer.drawPile.subscribe(currentStack => {
-      this.cardStack = currentStack;
-      this.hasCards = true;
-    });
-  }
-
-  drawOne() {
-    this.dealer.drawOne();
-    this.hasCards = this.cardStack.length > 0;
-  }
-
+    drawOne() {
+        this.dealer.drawOne();
+        this.hasCards = this.cardStack.length > 0;
+    }
 }
