@@ -1,0 +1,7 @@
+<div class="actions-bar-container">
+    <div class="action-button" *ngFor="let action of activeActions">
+        {{action}}
+        <mat-icon class="icon">visibility</mat-icon>
+    </div>
+    <div (click)="doIt()">Hi</div>
+</div>

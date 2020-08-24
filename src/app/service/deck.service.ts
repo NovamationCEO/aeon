@@ -48,7 +48,6 @@ export class DeckService {
 
     shuffleFull(): void {
         const deck = this.loadCards();
-        console.log('deckType:', this.deckType, deck);
         this.discardPileSource.next([]);
 
 

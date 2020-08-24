@@ -5,17 +5,19 @@
 
     <div class="table">
         <div class="play-space">
-        <div class="card-container">
-            <app-draw-deck class="draw-deck"></app-draw-deck>
-        </div>
-        <div class="card-container" *ngFor="let card of discardPile">
-            <app-card [card]="card" class="card"></app-card>
+            <div class="card-container">
+                <app-draw-deck class="draw-deck"></app-draw-deck>
+            </div>
+            <div class="card-container" *ngFor="let card of discardPile">
+                <app-card [card]="card" class="card"></app-card>
+            </div>
         </div>
     </div>
+
+    <div class="actions">
+        <app-actions-bar></app-actions-bar>
     </div>
 
-    <div class="actions"></div>
-
-    <app-actions></app-actions>
+    <app-actions-menu></app-actions-menu>
     <app-settings></app-settings>
 </div>
