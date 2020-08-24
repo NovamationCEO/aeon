@@ -17,13 +17,7 @@ export class ActionsBarComponent implements OnInit {
 
     ngOnInit() {
         this.layout.actionsOpen.subscribe(newStatus => this.status = newStatus)
-        this.actions.actionsActive.subscribe(newStatus => {
-            this.activeActions = []; Object.keys(newStatus).forEach((action) => {
-                if (newStatus[action]) {
-                    this.activeActions.push(action)
-                }
-            })
-        })
+        this.actions.activeActions.subscribe(newStatus => this.activeActions = newStatus)
     }
 
     doIt() {

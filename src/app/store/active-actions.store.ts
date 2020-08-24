@@ -7,51 +7,44 @@ import { BehaviorSubject } from 'rxjs';
 
 export class ActiveActionsStore {
 
-
-    private activeActions = new BehaviorSubject<object>({
-        peek: false
-    });
-
     private noObserveActiveActions = {
         peek: {
             AE: false
         }
     }
 
-    actionsActive = this.activeActions.asObservable()
+    private activeActionsSubj = new BehaviorSubject<Array<string>>([])
 
-    private activeActionsArray = new BehaviorSubject<Array<string>>([])
-
-    activeActionsArray2 = this.activeActionsArray.asObservable()
+    activeActions = this.activeActionsSubj.asObservable()
 
 
     constructor() { }
 
     setActiveAction(actionName: string, source: string, value: boolean): void {
         this.activeActions[actionName][source].next(value)
+
+        this.updateActive()
     }
 
     updateActive() {
+        const newArr = []
         Object.keys(this.noObserveActiveActions).forEach((action) => {
-            const values = []
-            Object.keys(this.noObserveActiveActions[action]).forEach((source) => {
-                values.push(this.noObserveActiveActions[source])
-            })
-            this.noObserveActiveActions[action] = values.some((s) => s)
+            const vals = Object.keys(this.noObserveActiveActions[action]).map((val) => this.noObserveActiveActions[action][val])
+            if (vals.some((v) => v)) {
+                newArr.push(action)
+            }
         })
-        this.activeActions.next(this.noObserveActiveActions)
+        this.activeActionsSubj.next(newArr)
     }
 
     toggleActiveSet(source: string) {
         Object.keys(this.noObserveActiveActions).forEach((action) => {
-            Object.keys(action).forEach((set) => {
+            Object.keys(this.noObserveActiveActions[action]).forEach((set) => {
                 if (set === source) {
                     this.noObserveActiveActions[action][set] = !this.noObserveActiveActions[action][set]
                 }
             })
         })
-
-        console.log(this.noObserveActiveActions)
 
         this.updateActive()
     }
