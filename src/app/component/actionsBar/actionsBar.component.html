@@ -1,8 +1,23 @@
 <div class="actions-bar-container">
-    <div class="action-button" *ngFor="let action of activeActions">
+    <div class="action-button" (click)="peek()">
         <mat-icon class="icon">visibility</mat-icon>
     </div>
-    <div :class="action-button" (click)="doIt()">Hi</div>
+    <div class="action-button">
+        <mat-icon class="icon">polymer</mat-icon>
+    </div>
+    <div class="action-button" (click)="peekTopBottom()">
+        <mat-icon class="icon">swap_horizontal_circle</mat-icon>
+    </div>
+    <div class="action-button">
+        <mat-icon class="icon">view_carousel</mat-icon>
+    </div>
+    <div class="action-button">
+        <mat-icon class="icon">wifi_protected</mat-icon>
+    </div>
+    <div class="action-button">
+        <mat-icon class="icon">visibility</mat-icon>
+    </div>
+    <!-- <div :class="action-button" (click)="doIt()">Hi</div> -->
 </div>
 
 // Sunder AE Shuffle all Nemisis back into the deck

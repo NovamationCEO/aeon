@@ -1,3 +1,5 @@
+@import "../../../../colors.scss";
+
 .card {
     display: flex;
     justify-content: center;
@@ -99,6 +101,42 @@
             }
         }
     }
+   
+    .card-action-container {
+        width: 100%;
+        height: 35%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background: rbga(40, 200, 40, 3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-top: 2px solid black;
+
+        .action-button {
+            margin: 5px;
+            min-width: 40px;
+            min-height: 40px;
+            color: gainsboro;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            transform: scale(2);
+
+            &:hover {
+                color: $aeon-white;
+            }
+        }
+    }
+
+    .huge {
+        color: violet;
+        font-size: 15px;
+    }
+
+   
 }
 
 @keyframes pulse {

@@ -19,10 +19,18 @@ export class DeckService {
     private drawPileSource = new BehaviorSubject<Array<string>>(this.decks.d2);
     private discardPileSource = new BehaviorSubject<Array<string>>([]);
     private historySource = new BehaviorSubject<Array<string>>([]);
+    private peekPileSource = new BehaviorSubject<Array<string>>([]);
+    private actionTypeSource = new BehaviorSubject<string>('');
     drawPile = this.drawPileSource.asObservable();
     discardPile = this.discardPileSource.asObservable();
     history = this.historySource.asObservable();
+    peekPile = this.peekPileSource.asObservable()
+    actionType = this.actionTypeSource.asObservable();
     private lastDraw: Date = new Date();
+    private actionTypes = {
+        peekOne: 'Peek One',
+        peekTopBottom: 'Peek Top Bottom',
+    }
 
     constructor() { }
 
@@ -67,13 +75,31 @@ export class DeckService {
 
         this.lastDraw = new Date();
 
-        if (this.drawPileSource.value.length <= 0) {
+        if (this.drawPileSource.value.length <= 0 && this.peekPileSource.value.length <= 0) {
             this.shuffleFull();
         }
 
-        const newCard = this.drawPileSource.value.pop();
+        this.actionTypeSource.next('')
+
+        const newCard = this.peekPileSource.value.length > 0 
+            ? this.peekPileSource.value.shift() 
+            : this.drawPileSource.value.pop();
         this.discardPileSource.value.push(newCard);
         this.historySource.value.push(newCard);
+    }
+
+    peekOne(): void {
+        if (this.drawPileSource.value.length === 0) {
+            return
+        }
+        const peekCard = this.drawPileSource.value.pop()
+        this.peekPileSource.value.push(peekCard)
+        this.actionTypeSource.next(this.actionTypes.peekOne)
+    }
+
+    peekTopBottom(): void {
+        this.peekOne()
+        this.actionTypeSource.next(this.actionTypes.peekTopBottom)
     }
 
     tooFast(): boolean {

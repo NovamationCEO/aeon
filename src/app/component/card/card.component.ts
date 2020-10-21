@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { DeckService } from 'src/app/service/deck.service';
 
 @Component({
   selector: 'app-card',
@@ -7,54 +8,54 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CardComponent implements OnInit {
 
+  constructor() {}    
   @Input() card: string;
+  @Input() actionType: string;
 
-  cardClass: string = "card hidden";
+  cardClass = 'card hidden';
   ringColors: Array<string>
-
-  constructor() { }
-
+    
   ngOnInit() {
-    setTimeout(() => this.cardClass = "card", 0);
+    setTimeout(() => this.cardClass = 'card', 0);
     this.cardColor();
   }
 
   cardColor(): void {
     switch(this.card) {
-      case "N": {
-          this.ringColors = ["red", "black", "yellow", "orange"];
+      case 'N': {
+          this.ringColors = ['red', 'black', 'yellow', 'orange'];
           break;
       }
-      case "1": {
-        this.ringColors = ["blue", "white", "blueviolet", "skyblue"];
+      case '1': {
+        this.ringColors = ['blue', 'white', 'blueviolet', 'skyblue'];
         break;
     }
-    case "2": {
-        this.ringColors = ["green", "white", "yellow", "lightseagreen"];
+    case '2': {
+        this.ringColors = ['green', 'white', 'yellow', 'lightseagreen'];
         break;
     }
-    case "3": {
-        this.ringColors = ["darkorange", "skyblue", "gold", "lightsalmon"];
+    case '3': {
+        this.ringColors = ['darkorange', 'skyblue', 'gold', 'lightsalmon'];
         break;
     }
-    case "4": {
-        this.ringColors = ["indigo", "lavender", "orchid", "seagreen"];
+    case '4': {
+        this.ringColors = ['indigo', 'lavender', 'orchid', 'seagreen'];
         break;
     }
-    case "W": {
-        this.ringColors = ["seashell", "blue", "green", "darkOrange"];
+    case 'W': {
+        this.ringColors = ['seashell', 'blue', 'green', 'darkOrange'];
         break;
     }
-    case "A": {
-        this.ringColors = ["blue", "lightseagreen", "yellow", "green"];
+    case 'A': {
+        this.ringColors = ['blue', 'lightseagreen', 'yellow', 'green'];
         break;
     }
-    case "B": {
-        this.ringColors = ["indigo", "lightsalmon", "lavender", "darkorange"];
+    case 'B': {
+        this.ringColors = ['indigo', 'lightsalmon', 'lavender', 'darkorange'];
         break;
     }
-    case "0": {
-        this.ringColors = ["white", "black", "white", "black"];
+    case '0': {
+        this.ringColors = ['white', 'black', 'white', 'black'];
         break;
     }
   }

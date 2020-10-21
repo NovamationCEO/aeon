@@ -9,7 +9,10 @@
                 <app-draw-deck class="draw-deck"></app-draw-deck>
             </div>
             <div class="card-container" *ngFor="let card of discardPile">
-                <app-card [card]="card" class="card"></app-card>
+                <app-card [card]="card" actionType=""></app-card>
+            </div>
+            <div class="card-container" *ngFor="let card of peekPile">
+                <app-card [card]="card" [actionType]="actionType"></app-card>
             </div>
         </div>
     </div>
@@ -18,6 +21,6 @@
         <app-actions-bar></app-actions-bar>
     </div>
 
-    <app-actions-menu></app-actions-menu>
+    <!-- <app-actions-menu></app-actions-menu> -->
     <app-settings></app-settings>
 </div>

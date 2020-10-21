@@ -8,5 +8,12 @@
     <div class="number">
         {{card}}
     </div>
+    <div class="huge">
+    {{actionType}}</div>
+    <div *ngIf="actionType != ''" class="card-action-container">
+            <mat-icon class="action-button" *ngIf="actionType === 'peekOne' || actionType === 'peekTopBottom'">arrow_circle_up</mat-icon>
+            <mat-icon class="action-button" *ngIf="actionType === 'peekTopBottom' || actionType === 'peekTopBottom'">arrow_circle_down</mat-icon>
+
+    </div>
 </div>
 </div>

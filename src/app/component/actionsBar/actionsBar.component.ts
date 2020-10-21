@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { LayoutStoreService } from '../../store/layout-store.service';
 import { ActiveActionsStore } from '../../store/active-actions.store';
+import { DeckService } from 'src/app/service/deck.service';
 
 @Component({
     selector: 'app-actions-bar',
@@ -11,7 +12,7 @@ export class ActionsBarComponent implements OnInit {
 
     status: boolean;
 
-    constructor(private layout: LayoutStoreService, private actions: ActiveActionsStore) { }
+    constructor(private layout: LayoutStoreService, private actions: ActiveActionsStore, private dealer: DeckService) { }
 
     activeActions = []
 
@@ -26,5 +27,13 @@ export class ActionsBarComponent implements OnInit {
 
     toggle() {
         this.layout.toggleActions();
+    }
+
+    peek() {
+        this.dealer.peekOne();
+    }
+
+    peekTopBottom() {
+        this.dealer.peekTopBottom();
     }
 }
