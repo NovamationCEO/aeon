@@ -58,7 +58,10 @@ export class CardComponent implements OnInit {
         this.ringColors = ['white', 'black', 'white', 'black'];
         break;
     }
-  }
+    case 'D': {
+        this.ringColors = ['violet', 'black', 'red', 'yellow'];
+      break;
+    }
 }
-
+}
 }
