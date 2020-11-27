@@ -101,10 +101,10 @@
             }
         }
     }
-   
+
     .card-action-container {
         width: 100%;
-        height: 35%;
+        height: 20%;
         position: absolute;
         bottom: 0;
         left: 0;
@@ -114,29 +114,32 @@
         justify-content: center;
         border-top: 2px solid black;
 
+        .scrim {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: black;
+            opacity: 0.6;
+            z-index: 0;
+        }
+
         .action-button {
+            z-index: 1;
             margin: 5px;
-            min-width: 40px;
-            min-height: 40px;
-            color: gainsboro;
+            color: slategray;
             display: flex;
             justify-content: center;
             align-items: center;
             flex: 1;
             transform: scale(2);
+            filter: drop-shadow(1px 1px 10px red)
+                drop-shadow(-1px -1px 10px red);
 
             &:hover {
                 color: $aeon-white;
             }
         }
     }
-
-    .huge {
-        color: violet;
-        font-size: 15px;
-    }
-
-   
 }
 
 @keyframes pulse {

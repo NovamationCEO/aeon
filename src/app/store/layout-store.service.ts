@@ -7,7 +7,6 @@ import { BehaviorSubject } from 'rxjs';
 
 export class LayoutStoreService {
 
-  //Eventually set to True
   private setOpen = new BehaviorSubject<boolean>(false);
   private actOpen = new BehaviorSubject<boolean>(false);
   settingsOpen = this.setOpen.asObservable();

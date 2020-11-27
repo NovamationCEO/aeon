@@ -1,5 +1,10 @@
 <div [ngClass]="{ 'settings-page': true, 'push-left': !status }">
-    <button (click)="toggle()" mat-fab class="settings-button" aria-label="Open or close settings.">
+    <button
+        (click)="toggle()"
+        mat-fab
+        class="settings-button"
+        aria-label="Open or close settings."
+    >
         <mat-icon [ngClass]="{ icon: true, spun: status }">settings</mat-icon>
     </button>
     <div class="settings-container">
@@ -7,28 +12,40 @@
             <div class="title-bar">Settings</div>
             <div class="main-row">
                 <div class="player-bar" [ngClass]="{ tiny: hidePlayers }">
-                    <div class="player-icon-container" [ngClass]="{ tiny: hidePlayers }" (click)="toggleShowPlayers()">
+                    <div
+                        class="player-icon-container"
+                        [ngClass]="{ tiny: hidePlayers }"
+                        (click)="toggleShowPlayers()"
+                    >
                         <div *ngIf="hidePlayers">
                             {{ deckNames()[deckType] }}
                         </div>
-                        <mat-icon *ngIf="!hidePlayers" class="player-icon">face</mat-icon>
+                        <mat-icon *ngIf="!hidePlayers" class="player-icon"
+                            >face</mat-icon
+                        >
                     </div>
 
-                    <div class="player-button" *ngFor="let type of deckNames() | keyvalue"
-                        (click)="setDeckType(type.key)" [ngClass]="{
+                    <div
+                        class="player-button"
+                        *ngFor="let type of deckNames() | keyvalue"
+                        (click)="setDeckType(type.key)"
+                        [ngClass]="{
                             activated: deckType == type.key,
                             hidden: hidePlayers
-                        }">
+                        }"
+                    >
                         {{ type.value }}
                     </div>
                 </div>
                 <div class="light-up-column">
-                    <div class="enabled-actions-container">
-                        Light-up
-                    </div>
+                    <div class="enabled-actions-container">Light-up</div>
                     <div class="base-sets">
-                        <div class="set-button" *ngFor="let set of orderedSetList" (click)="toggleBaseSet(set.abbr)"
-                            [ngClass]="{ activated: setsActive[set.abbr] }">
+                        <div
+                            class="set-button"
+                            *ngFor="let set of orderedSetList"
+                            (click)="toggleBaseSet(set.abbr)"
+                            [ngClass]="{ activated: setsActive[set.abbr] }"
+                        >
                             {{ set.name }}
                         </div>
                     </div>

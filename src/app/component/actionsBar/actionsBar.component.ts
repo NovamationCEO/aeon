@@ -1,28 +1,31 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { LayoutStoreService } from '../../store/layout-store.service';
-import { ActiveActionsStore } from '../../store/active-actions.store';
-import { DeckService } from 'src/app/service/deck.service';
+import { Component, OnInit, Input } from "@angular/core";
+import { LayoutStoreService } from "../../store/layout-store.service";
+import { ActiveActionsStore } from "../../store/active-actions.store";
+import { DeckService } from "src/app/service/deck.service";
 
 @Component({
-    selector: 'app-actions-bar',
-    templateUrl: './actionsBar.component.html',
-    styleUrls: ['./actionsBar.component.scss']
+    selector: "app-actions-bar",
+    templateUrl: "./actionsBar.component.html",
+    styleUrls: ["./actionsBar.component.scss"],
 })
 export class ActionsBarComponent implements OnInit {
-
     status: boolean;
+    isNoClick: boolean;
 
-    constructor(private layout: LayoutStoreService, private actions: ActiveActionsStore, private dealer: DeckService) { }
+    constructor(
+        private layout: LayoutStoreService,
+        private dealer: DeckService
+    ) {}
 
-    activeActions = []
+    activeActions = [];
 
     ngOnInit() {
-        this.layout.actionsOpen.subscribe(newStatus => this.status = newStatus)
-        this.actions.activeActions.subscribe(newStatus => this.activeActions = newStatus)
-    }
-
-    doIt() {
-        this.actions.toggleActiveSet('AE')
+        this.layout.actionsOpen.subscribe(
+            (newStatus) => (this.status = newStatus)
+        );
+        this.dealer.actionType.subscribe(
+            (currentAction) => (this.isNoClick = currentAction !== "")
+        );
     }
 
     toggle() {
@@ -35,5 +38,9 @@ export class ActionsBarComponent implements OnInit {
 
     peekTopBottom() {
         this.dealer.peekTopBottom();
+    }
+
+    chooseOrder() {
+        this.dealer.chooseOrder();
     }
 }

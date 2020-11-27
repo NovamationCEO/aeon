@@ -1,6 +1,10 @@
 <div class="main-component">
     <div class="history">
-        <app-history-bubble class="bubble" *ngFor="let item of history" [typeId]="item"></app-history-bubble>
+        <app-history-bubble
+            class="bubble"
+            *ngFor="let item of history"
+            [typeId]="item"
+        ></app-history-bubble>
     </div>
 
     <div class="table">
@@ -11,7 +15,7 @@
             <div class="card-container" *ngFor="let card of discardPile">
                 <app-card [card]="card" actionType=""></app-card>
             </div>
-            <div class="card-container" *ngFor="let card of peekPile">
+            <div class="card-container peek" *ngFor="let card of peekPile">
                 <app-card [card]="card" [actionType]="actionType"></app-card>
             </div>
         </div>
@@ -21,6 +25,5 @@
         <app-actions-bar></app-actions-bar>
     </div>
 
-    <!-- <app-actions-menu></app-actions-menu> -->
     <app-settings></app-settings>
 </div>

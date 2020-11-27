@@ -1,19 +1,51 @@
 <div class="card">
     <div class="card-face">
-    <div class="circle flame-1" [ngStyle]="{background: ringColors[0]}"></div>
-    <div class="circle flame-2" [ngStyle]="{background: ringColors[1]}"></div>
-    <div class="circle flame-3" [ngStyle]="{background: ringColors[2]}"></div>
-    <div class="circle flame-4" [ngStyle]="{background: ringColors[3]}"></div>
-    <div class="circle flame-5" [ngStyle]="{background: ringColors[0]}"></div>
-    <div class="number">
-        {{card}}
+        <div
+            class="circle flame-1"
+            [ngStyle]="{ background: ringColors[0] }"
+        ></div>
+        <div
+            class="circle flame-2"
+            [ngStyle]="{ background: ringColors[1] }"
+        ></div>
+        <div
+            class="circle flame-3"
+            [ngStyle]="{ background: ringColors[2] }"
+        ></div>
+        <div
+            class="circle flame-4"
+            [ngStyle]="{ background: ringColors[3] }"
+        ></div>
+        <div
+            class="circle flame-5"
+            [ngStyle]="{ background: ringColors[0] }"
+        ></div>
+        <div class="number">
+            {{ card }}
+        </div>
+        <div *ngIf="actionType != ''" class="card-action-container">
+            <mat-icon
+                class="action-button"
+                (click)="topDeck()"
+                *ngIf="
+                    actionType === 'Peek One' ||
+                    actionType === 'Peek Top Bottom'
+                "
+                >arrow_circle_up</mat-icon
+            >
+            <mat-icon
+                class="action-button"
+                (click)="bottomDeck()"
+                *ngIf="actionType === 'Peek Top Bottom'"
+                >arrow_circle_down</mat-icon
+            >
+            <mat-icon
+                class="action-button"
+                (click)="bottomDeck()"
+                *ngIf="actionType === 'Choose Order'"
+                >view_carousel</mat-icon
+            >
+            <div class="scrim"></div>
+        </div>
     </div>
-    <div class="huge">
-    {{actionType}}</div>
-    <div *ngIf="actionType != ''" class="card-action-container">
-            <mat-icon class="action-button" *ngIf="actionType === 'peekOne' || actionType === 'peekTopBottom'">arrow_circle_up</mat-icon>
-            <mat-icon class="action-button" *ngIf="actionType === 'peekTopBottom' || actionType === 'peekTopBottom'">arrow_circle_down</mat-icon>
-
-    </div>
-</div>
 </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit, HostListener } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
 import { DeckService } from "src/app/service/deck.service";
 
 @Component({
@@ -9,13 +10,21 @@ import { DeckService } from "src/app/service/deck.service";
 export class DrawDeckComponent implements OnInit {
     constructor(private dealer: DeckService) {}
 
+    currentAction: string;
     hasCards: boolean;
     cardStack: Array<string>;
 
     @HostListener("window:keydown", ["$event"])
     onKeyDown(event: KeyboardEvent) {
         if (event.key === " ") {
-            this.drawOne();
+            switch (this.currentAction) {
+                case "":
+                case "Peek One":
+                    this.drawOne();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -23,6 +32,9 @@ export class DrawDeckComponent implements OnInit {
         this.dealer.drawPile.subscribe((currentStack) => {
             this.cardStack = currentStack;
             this.hasCards = true;
+        });
+        this.dealer.actionType.subscribe((actionType) => {
+            this.currentAction = actionType;
         });
     }
 

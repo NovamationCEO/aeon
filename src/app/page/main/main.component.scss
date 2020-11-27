@@ -3,10 +3,8 @@
 .main-component {
     position: relative;
     display: flex;
-    height: 100%;
     width: 100%;
-    overflow: hidden;
-    padding: 2em 0px;
+    padding-top: 2em;
     flex-direction: column;
 
     .history {
@@ -36,7 +34,7 @@
         max-width: 100%;
         position: relative;
         display: flex;
-        height: 90%;
+        height: 100%;
         flex-direction: row;
         background: radial-gradient(
                     hsl(219, 44%, 65%) 4%,
@@ -121,13 +119,19 @@
                     max-height: 33%;
                 }
             }
+
+            .peek {
+                transform: scale(0.8);
+            }
         }
     }
 
     .actions {
-        position: relative;
+        position: absolute;
         display: flex;
         height: 20%;
-        background: black;
+        left: 0;
+        bottom: 10px;
+        width: 100%;
     }
 }

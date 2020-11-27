@@ -8,7 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainComponent } from './page/main/main.component';
 import { NavComponent } from './component/nav/nav.component';
 import { SettingsComponent } from './component/settings/settings.component';
-import { ActionsMenuComponent } from './component/actionsMenu/actionsMenu.component';
 import { ActionsBarComponent } from './component/actionsBar/actionsBar.component';
 import { CardComponent } from './component/card/card.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -21,7 +20,6 @@ import { HistoryBubbleComponent } from './component/history-bubble/history-bubbl
         MainComponent,
         NavComponent,
         SettingsComponent,
-        ActionsMenuComponent,
         ActionsBarComponent,
         CardComponent,
         DrawDeckComponent,
