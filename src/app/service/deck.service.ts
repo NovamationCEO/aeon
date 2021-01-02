@@ -1,7 +1,5 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-import { clone } from "lodash";
-import { CardComponent } from "../component/card/card.component";
 
 export enum actionTypes {
     peekOne = "Peek One",
@@ -14,18 +12,21 @@ export enum actionTypes {
 })
 export class DeckService {
     private decks = {
-        d1: ["1", "1", "1", "N", "N"],
-        d2: ["1", "1", "2", "2", "N", "N"],
-        d3: ["1", "2", "3", "W", "N", "N"],
-        d3a: ["A", "A", "3", "W", "N", "N"],
-        d4: ["1", "2", "3", "4", "N", "N"],
-        d4a: ["A", "A", "B", "B", "N", "N"],
+        d1: ["1", "1", "1"],
+        d2: ["1", "1", "2", "2"],
+        d3: ["1", "2", "3", "W"],
+        d3a: ["A", "A", "3", "W"],
+        d4: ["1", "2", "3", "4"],
+        d4a: ["A", "A", "B", "B"],
     };
 
-    private nemisisCards = {
+    private nemesisCards = {
         nn: ["N", "N"],
-        nb: ["N", "BLTZ"],
+        nx: ["N", "X"],
+        nd: ["N", "D"],
     };
+
+    private nemesisCardOptions = ["N", "X", "D"];
 
     private drawPileSource = new BehaviorSubject<Array<string>>(this.decks.d2);
     private discardPileSource = new BehaviorSubject<Array<string>>([]);
@@ -42,36 +43,58 @@ export class DeckService {
     constructor() {}
 
     deckType: string;
+    nemesisDeckType: string;
 
     init(): void {
         this.deckType = "d2";
+        this.nemesisDeckType = "nn";
         this.shuffleFull();
-    }
-
-    resetTable(deckType: string | null): void {
-        this.historySource.next([]);
-
-        if (deckType) {
-            this.deckType = deckType;
-        }
-        this.shuffleFull();
-    }
-
-    loadCards(): Array<string> {
-        return clone(this.decks[this.deckType]);
     }
 
     shuffleFull(): void {
         const deck = this.loadCards();
         this.discardPileSource.next([]);
 
+        const shuffledDeck = this.shuffleThese(deck);
+
+        this.drawPileSource.next(shuffledDeck);
+        this.historySource.value.push("|");
+    }
+
+    shuffleThese(deck: Array<string>): Array<string> {
         for (let i = deck.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [deck[i], deck[j]] = [deck[j], deck[i]];
         }
+        return deck;
+    }
 
-        this.drawPileSource.next(deck);
-        this.historySource.value.push("|");
+    loadCards(): Array<string> {
+        return this.decks[this.deckType].concat(
+            this.nemesisCards[this.nemesisDeckType]
+        );
+    }
+
+    setDeckType(newType: string) {
+        if (newType === this.deckType) {
+            return;
+        }
+        this.deckType = newType;
+        this.resetTable();
+    }
+
+    setNemesisDeckType(newType: string) {
+        if (newType === this.nemesisDeckType) {
+            return;
+        }
+        this.nemesisDeckType = newType;
+        this.resetTable();
+    }
+
+    resetTable() {
+        this.historySource.next([]);
+
+        this.shuffleFull();
     }
 
     drawOne(): void {
@@ -98,6 +121,15 @@ export class DeckService {
         this.historySource.value.push(newCard);
     }
 
+    tooFast(): boolean {
+        const nowDT = new Date();
+        const nowTS = nowDT.getTime();
+        const thenTS = this.lastDraw.getTime();
+        const secondsDiff = Math.abs(thenTS - nowTS) / 1000;
+
+        return secondsDiff < 0.2;
+    }
+
     peekOne(): void {
         if (this.drawPileSource.value.length === 0) {
             return;
@@ -117,15 +149,6 @@ export class DeckService {
             this.peekOne();
         }
         this.actionTypeSource.next(actionTypes.chooseOrder);
-    }
-
-    tooFast(): boolean {
-        const nowDT = new Date();
-        const nowTS = nowDT.getTime();
-        const thenTS = this.lastDraw.getTime();
-        const secondsDiff = Math.abs(thenTS - nowTS) / 1000;
-
-        return secondsDiff < 0.2;
     }
 
     toDeckTop(card: string): void {
@@ -150,5 +173,20 @@ export class DeckService {
         if (this.peekPileSource.value.length === 0) {
             this.actionTypeSource.next("");
         }
+    }
+
+    refreshNemesis(): void {
+        const nemesisCards = [] as Array<string>;
+        this.discardPileSource.next(
+            this.discardPileSource.value.map((i) => {
+                if (this.nemesisCardOptions.includes(i)) {
+                    nemesisCards.push(i);
+                    return "n";
+                }
+                return i;
+            })
+        );
+        const newDraw = this.drawPileSource.value.concat(nemesisCards);
+        this.drawPileSource.next(this.shuffleThese(newDraw));
     }
 }

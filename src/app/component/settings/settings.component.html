@@ -11,20 +11,10 @@
         <div class="settings-wrapper">
             <div class="title-bar">Settings</div>
             <div class="main-row">
-                <div class="player-bar" [ngClass]="{ tiny: hidePlayers }">
-                    <div
-                        class="player-icon-container"
-                        [ngClass]="{ tiny: hidePlayers }"
-                        (click)="toggleShowPlayers()"
-                    >
-                        <div *ngIf="hidePlayers">
-                            {{ deckNames()[deckType] }}
-                        </div>
-                        <mat-icon *ngIf="!hidePlayers" class="player-icon"
-                            >face</mat-icon
-                        >
+                <div class="player-bar">
+                    <div class="player-icon-container">
+                        <mat-icon class="player-icon">face</mat-icon>
                     </div>
-
                     <div
                         class="player-button"
                         *ngFor="let type of deckNames() | keyvalue"
@@ -37,17 +27,22 @@
                         {{ type.value }}
                     </div>
                 </div>
-                <div class="light-up-column">
-                    <div class="enabled-actions-container">Light-up</div>
-                    <div class="base-sets">
-                        <div
-                            class="set-button"
-                            *ngFor="let set of orderedSetList"
-                            (click)="toggleBaseSet(set.abbr)"
-                            [ngClass]="{ activated: setsActive[set.abbr] }"
-                        >
-                            {{ set.name }}
-                        </div>
+            </div>
+            <div class="main-row">
+                <div class="player-bar second-row">
+                    <div class="player-icon-container">
+                        <mat-icon class="player-icon">bug_report</mat-icon>
+                    </div>
+
+                    <div
+                        class="player-button long-button"
+                        *ngFor="let type of nemesisDeckNames() | keyvalue"
+                        (click)="setNemesisDeckType(type.key)"
+                        [ngClass]="{
+                            activated: nemesisDeckType == type.key
+                        }"
+                    >
+                        {{ type.value }}
                     </div>
                 </div>
             </div>

@@ -43,4 +43,8 @@ export class ActionsBarComponent implements OnInit {
     chooseOrder() {
         this.dealer.chooseOrder();
     }
+
+    refreshNemesis() {
+        this.dealer.refreshNemesis();
+    }
 }

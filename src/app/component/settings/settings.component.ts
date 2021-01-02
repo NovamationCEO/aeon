@@ -1,45 +1,47 @@
-import { Component, OnInit } from '@angular/core';
-import { LayoutStoreService } from '../../store/layout-store.service';
-import { DeckService } from '../../service/deck.service';
-import { SetStore } from '../../store/sets-store.service'
+import { Component, OnInit } from "@angular/core";
+import { LayoutStoreService } from "../../store/layout-store.service";
+import { DeckService } from "../../service/deck.service";
 
 @Component({
-    selector: 'app-settings',
-    templateUrl: './settings.component.html',
-    styleUrls: ['./settings.component.scss'],
+    selector: "app-settings",
+    templateUrl: "./settings.component.html",
+    styleUrls: ["./settings.component.scss"],
 })
 export class SettingsComponent implements OnInit {
-
     constructor(
         private layout: LayoutStoreService,
-        private dealer: DeckService,
-        private sets: SetStore,
-    ) { }
-    ;
+        private dealer: DeckService
+    ) {}
     status: boolean;
     deckType: string;
-    hidePlayers: boolean;
-    setsActive: object;
-
-    orderedSetList = this.sets.orderedSets
+    nemesisDeckType: string;
 
     deckNames() {
         return {
             d1: 1,
             d2: 2,
             d3: 3,
-            d3a: '3A',
+            d3a: "3A",
             d4: 4,
-            d4a: 'AB',
-        }
+            d4a: "AB",
+        };
     }
+
+    nemesisDeckNames() {
+        return {
+            nn: "Nemesis",
+            nx: "Blitz",
+            nd: "Delirium",
+        };
+    }
+
     ngOnInit() {
         this.layout.settingsOpen.subscribe(
             (newStatus) => (this.status = newStatus)
         );
-        this.sets.activeSets.subscribe(newValue => this.setsActive = newValue)
-        this.deckType = 'd2';
-        this.hidePlayers = true;
+
+        this.deckType = "d2";
+        this.nemesisDeckType = "nn";
     }
 
     toggle() {
@@ -47,19 +49,12 @@ export class SettingsComponent implements OnInit {
     }
 
     setDeckType(newValue) {
-        if (newValue === this.deckType) {
-            return;
-        }
-
         this.deckType = newValue;
-        this.dealer.resetTable(newValue);
+        this.dealer.setDeckType(newValue);
     }
 
-    toggleShowPlayers(): void {
-        this.hidePlayers = !this.hidePlayers;
-    }
-
-    toggleBaseSet(setName: string): void {
-        this.sets.toggleActiveSet(setName)
+    setNemesisDeckType(newValue) {
+        this.nemesisDeckType = newValue;
+        this.dealer.setNemesisDeckType(newValue);
     }
 }

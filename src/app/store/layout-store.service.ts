@@ -1,26 +1,24 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: "root",
 })
-
 export class LayoutStoreService {
+    private setOpen = new BehaviorSubject<boolean>(false);
+    private actOpen = new BehaviorSubject<boolean>(false);
+    settingsOpen = this.setOpen.asObservable();
+    actionsOpen = this.actOpen.asObservable();
 
-  private setOpen = new BehaviorSubject<boolean>(false);
-  private actOpen = new BehaviorSubject<boolean>(false);
-  settingsOpen = this.setOpen.asObservable();
-  actionsOpen = this.actOpen.asObservable();
+    constructor() {}
 
-  constructor() { }
+    toggleSettings(): void {
+        this.actOpen.next(false);
+        this.setOpen.next(!this.setOpen.value);
+    }
 
-  toggleSettings(): void {
-    this.actOpen.next(false);
-    this.setOpen.next(!this.setOpen.value);
-  }
-
-  toggleActions(): void {
-    this.setOpen.next(false);
-    this.actOpen.next(!this.actOpen.value);
-  }
+    toggleActions(): void {
+        this.setOpen.next(false);
+        this.actOpen.next(!this.actOpen.value);
+    }
 }
