@@ -20,17 +20,17 @@ export class ActionsBarComponent implements OnInit {
     activeActions = [];
 
     ngOnInit() {
-        this.layout.actionsOpen.subscribe(
-            (newStatus) => (this.status = newStatus)
-        );
+        // this.layout.actionsOpen.subscribe(
+        //     (newStatus) => (this.status = newStatus)
+        // );
         this.dealer.actionType.subscribe(
             (currentAction) => (this.isNoClick = currentAction !== "")
         );
     }
 
-    toggle() {
-        this.layout.toggleActions();
-    }
+    // toggle() {
+    //     this.layout.toggleActions();
+    // }
 
     peek() {
         this.dealer.peekOne();
