@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "scripts": {
         "ng": "ng",
-        "start": "ng serve --host 0.0.0.0",
+        "start": "ng serve --host 0.0.0.0 --disableHostCheck",
         "local": "ng serve",
         "build": "ng build",
         "test": "ng test",
@@ -48,7 +48,7 @@
         "eslint": "^7.13.0",
         "eslint-config-airbnb-base": "^14.2.1",
         "eslint-plugin-import": "^2.22.1",
-        "jasmine-core": "~3.4.0",
+        "jasmine-core": "^3.7.1",
         "jasmine-spec-reporter": "~4.2.1",
         "karma": "~4.1.0",
         "karma-chrome-launcher": "~2.2.0",

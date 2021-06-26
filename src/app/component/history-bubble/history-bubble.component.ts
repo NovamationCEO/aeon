@@ -12,8 +12,8 @@ export class HistoryBubbleComponent implements OnInit {
     colorClass: string;
     colorChart = {
         "|": "black",
-        "1": "blue",
-        "2": "green",
+        1: "blue",
+        2: "green",
         N: "red",
     };
 
