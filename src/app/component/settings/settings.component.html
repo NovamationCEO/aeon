@@ -21,9 +21,10 @@
                         (click)="setDeckType(type.key)"
                         [ngClass]="{
                             activated: deckType == type.key,
-                            hidden: hidePlayers
+                            hidden: false
                         }"
                     >
+<!--                        hidden: hidePlayers-->
                         {{ type.value }}
                     </div>
                 </div>
